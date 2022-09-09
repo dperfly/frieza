@@ -14,14 +14,71 @@
 
 ### 配置与启动方式
 
-1.将Frieza-master工具放置到`jmeter`的`bin`目录下      
+1.将Frieza工具放置到`jmeter`的`bin`目录下      
 2.赋予工具可执行权限
 
 ```text
-  chmod +x Frieza-master
+chmod +x Frieza
 ```
 
-3.启动./Frieza-master
+3.启动Frieza-master
+
+```text
+./Frieza -M
+```
+
+4.启动Frieza-slave
+
+```text
+./Frieza -R=192.168.0.3     (IP是master机的ip)
+```
+```text
+ _____   _____    _   _____   ______      ___  
+|  ___| |  _  \  | | | ____| |___  /     /   | 
+| |__   | |_| |  | | | |__      / /     / /| | 
+|  __|  |  _  /  | | |  __|    / /     / / | | 
+| |     | | \ \  | | | |___   / /__   / /  | | 
+|_|     |_|  \_\ |_| |_____| /_____| /_/   |_| 
+2022/09/09 10:35:10 isMaster false
+2022/09/09 10:35:10 master is :  10.0.12.6:8081
+2022/09/09 10:35:10 The service is starting. Please wait...
+2022/09/09 10:35:13 find Frieza master success...
+2022/09/09 10:35:14 run cmd >>>  ./jmeter -Djava.rmi.server.hostname=10.0.12.13 -s -j jmeter-server.log
+2022/09/09 10:35:14 [jmeter-server] Neither the JAVA_HOME nor the JRE_HOME environment variable is defined
+2022/09/09 10:35:14 try run >>> yum -y install java-1.8.0-openjdk.x86_64
+2022/09/09 10:35:14 try install jdk >>> sudo apt-get update; sudo apt-get -y install default-jdk
+2022/09/09 10:36:16 install jdk success
+2022/09/09 10:36:16 restart...
+2022/09/09 10:36:16 [Frieza-client] close UpdateSlaveStatus func
+2022/09/09 10:36:16 [Frieza-client] close isFailedStop func
+2022/09/09 10:36:16 [Frieza-client] close recvRunCmd func
+2022/09/09 10:36:16 [Frieza-client] close ALL func ok
+2022/09/09 10:36:16 The service is starting. Please wait...
+2022/09/09 10:36:19 find Frieza master success...
+2022/09/09 10:36:20 run cmd >>>  ./jmeter -Djava.rmi.server.hostname=10.0.12.13 -s -j jmeter-server.log
+2022/09/09 10:36:22 [jmeter-server] An error occurred: Listen failed on port: 0; nested exception is: 
+2022/09/09 10:36:22 set server.rmi.ssl.disable is success
+2022/09/09 10:36:22 [Frieza-client] close UpdateSlaveStatus func
+2022/09/09 10:36:22 [Frieza-client] close isFailedStop func
+2022/09/09 10:36:22 [Frieza-client] close CommandAndOutputChan func
+2022/09/09 10:36:22 [Frieza-client] close recvRunCmd func
+2022/09/09 10:36:22 [Frieza-client] close ALL func ok
+2022/09/09 10:36:22 The service is starting. Please wait...
+2022/09/09 10:36:25 find Frieza master success...
+2022/09/09 10:36:26 run cmd >>>  ./jmeter -Djava.rmi.server.hostname=10.0.12.13 -s -j jmeter-server.log
+2022/09/09 10:36:28 [jmeter-server] Created remote object: UnicastServerRef2 [liveRef: [endpoint:[10.0.12.13:44581](local),objID:[-1626e3b8:183201b1097:-7fff, 5023703330960619866]]]
+
+```
+
+5.查看命令帮助文档
+
+```text
+./Frieza -h
+
+  -M    default slave server
+  -R    string master host
+  -v    version
+```
 
 ### Frieza-master交互式命令
 
@@ -73,19 +130,20 @@
 
 ### 测试系统支持情况
 
-- [x] CentOS 7.6   
+- [x] CentOS 7.6
 - [x] CentOS 8.0
 - [x] CentOS 8.2
 - [x] TencentOS Server 3.1 (TK4)
 - [x] TencentOS Server 2.4 (TK4)
-- [ ] Ubuntu 18.04.1 LTS
-- [ ] Ubuntu 20.04 LTS
+- [x] Ubuntu 18.04.1 LTS
+- [x] Ubuntu 20.04 LTS
+- [x] Debian
 - [ ] Windows Server
-- [ ] Debian
+- [ ] Mac OS 
 
 ### TODO
 1. [ ] 更多系统支持
 2. [ ] 自动根据现有的设备情况自动配置`slave`的`JVM`
 3. [ ] master自动检查jmeter脚本中的results模块是否已经被禁用
 4. [ ] 根据`csv`或`txt`文件以及目前`slave`的数量自动分发测试数据到各个`slave`的指定目录中
-5. [ ] 检测并提示`master`和`slave`中的`jmeter`版本
+5. [ ] 检测并提示`master`和`slave`中的`jmeter`版本是否匹配
