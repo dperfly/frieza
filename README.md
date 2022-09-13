@@ -11,7 +11,7 @@
 * `Frieza`无需修改`master`或`slave`的`properties`中的`server.rmi.ssl.disable`,`remote_hosts`
   等参数（运行jmeter命令时也无需指定-R参数）
 * `Frieza`具有更强的控制`slave`负载机的运行与停止的能力，避免`master`停止，但是`slave`仍在运行的情况，避免部分`slave`异常导致无法启动分布式命令
-
+* `Frieza`自动检查jmeter脚本中的results相关模块是否已经被禁用(打开`result tree`会对性能结果有较大的影响)
 ### 配置与启动方式
 
 1.将Frieza工具放置到`jmeter`的`bin`目录下      
@@ -144,6 +144,5 @@ chmod +x Frieza
 ### TODO
 1. [ ] 更多系统支持
 2. [ ] 自动根据现有的设备情况自动配置`slave`的`JVM`
-3. [ ] master自动检查jmeter脚本中的results模块是否已经被禁用
-4. [ ] 根据`csv`或`txt`文件以及目前`slave`的数量自动分发测试数据到各个`slave`的指定目录中
-5. [ ] 检测并提示`master`和`slave`中的`jmeter`版本是否匹配
+3. [ ] 根据`csv`或`txt`文件以及目前`slave`的数量自动分发测试数据到各个`slave`的指定目录中
+4. [ ] 检测并提示`master`和`slave`中的`jmeter`版本是否匹配

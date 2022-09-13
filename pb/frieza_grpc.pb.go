@@ -22,7 +22,6 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FriezaClient interface {
-	//双向沟通stream
 	BidirectionalStream(ctx context.Context, opts ...grpc.CallOption) (Frieza_BidirectionalStreamClient, error)
 }
 
@@ -69,7 +68,6 @@ func (x *friezaBidirectionalStreamClient) Recv() (*Response, error) {
 // All implementations must embed UnimplementedFriezaServer
 // for forward compatibility
 type FriezaServer interface {
-	//双向沟通stream
 	BidirectionalStream(Frieza_BidirectionalStreamServer) error
 	mustEmbedUnimplementedFriezaServer()
 }

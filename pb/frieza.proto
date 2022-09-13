@@ -3,14 +3,13 @@ syntax = "proto3";
 option go_package = "./;pb";
 
 service Frieza{
-  //双向沟通stream
   rpc BidirectionalStream(stream Requests) returns (stream Response){}
 }
 
 message Requests {
   string IP = 1;
-  int32 Status = 3; //slave状态
-  string Message = 4; //启动更改状态时的错误信息
+  int32 Status = 2; //slave状态
+  string Message = 3; //启动更改状态时的错误信息
 }
 
 message Response {

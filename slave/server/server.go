@@ -168,11 +168,12 @@ func (s *SlaveServer) String() string {
 func (s *SlaveServer) dial() {
 	log.Println("The service is starting. Please wait...")
 	conn, err := grpc.Dial(s.address, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	s.conn = conn
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		s.Cancel()
+		return
 	}
+	s.conn = conn
 }
 
 func (s *SlaveServer) reCheckIsOk() {

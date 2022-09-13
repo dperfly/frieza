@@ -40,6 +40,15 @@ func CmdInput(jmeterRunner jmeter.JmeterRunner) {
 		}
 		if strings.HasPrefix(Cmd, "jmeter ") {
 			// jmeterRunner 命令行，目前只判断是否是“jmeterRunner ” 开头，未进行更详细的命令校验。
+
+			// 去掉result tree
+			jmx, err := jmeter.GetJmxFilename(Cmd)
+			if err != nil {
+				log.Println("jmeter script not found in (", Cmd, ")")
+				continue
+			}
+			jmeter.DisableJmeterResultTrees(jmx)
+			// run
 			log.Printf("run jmeterRunner shell >>> %s\n", Cmd)
 			if jmeterRunner.CanRun() {
 				go jmeterRunner.ExecJmeterScript(Cmd, slaves.GetAllCanRunIP())
