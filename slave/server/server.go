@@ -134,7 +134,7 @@ func (s *SlaveServer) isFailedStop() {
 }
 
 func (s *SlaveServer) interruptCheck() {
-	c := make(chan os.Signal)
+	c := make(chan os.Signal, 1) //  fix : misuse of unbuffered os.Signal channel as argument to signal.Notify
 	signal.Notify(c, os.Interrupt)
 	select {
 	case sig := <-c:
