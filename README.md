@@ -2,8 +2,10 @@
 
 ### 简介
 
-`Frieza`是一个jmeter分布式工具的加强版,更有效的控制jmeter的分布式执行效果
-
+`Frieza`是一个jmeter分布式工具的加强版,更有效的控制jmeter的分布式执行效果   
+<div align=center>
+<img src="https://user-images.githubusercontent.com/49722338/229748924-67168e69-f64d-453e-8440-cb2b2d9b78c4.png" width="550" >
+</div>
 ### 相较于jmeter分布式启动方式的优势
 
 * `Frieza`知道各个`slave`所处的运行状态
